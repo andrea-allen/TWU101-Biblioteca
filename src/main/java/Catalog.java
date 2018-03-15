@@ -12,14 +12,10 @@ public class Catalog {
     }
 
     public void listBooks() {
-        if (books.isEmpty()) {
-            printStream.println("");
+        String bookList = "";
+        for (String book : books) {
+            bookList += book + "\n";
         }
-        else {
-            printStream.println("Harry Potter and the Sorcerer's Stone");
-        }
-
+        printStream.println(bookList);
     }
-
-
 }
