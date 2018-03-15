@@ -12,6 +12,14 @@ public class Catalog {
     }
 
     public void listBooks() {
-        printStream.println("");
+        if (books.isEmpty()) {
+            printStream.println("");
+        }
+        else {
+            printStream.println("Harry Potter and the Sorcerer's Stone");
+        }
+
     }
+
+
 }

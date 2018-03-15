@@ -14,10 +14,21 @@ public class CatalogTest {
 
     @Test
     public void shouldPrintNoBooksWhenCatalogIsEmpty(){
-        printStream=mock(PrintStream.class);
-        books=new ArrayList<>();
-        catalog=new Catalog(books, printStream);
+        printStream = mock(PrintStream.class);
+        books = new ArrayList<>();
+        catalog = new Catalog(books, printStream);
         catalog.listBooks();
         verify(printStream).println("");
+    }
+
+    @Test
+    public void shouldPrintBookWhenCatalogHasOneBook() {
+        printStream = mock(PrintStream.class);
+        books = new ArrayList<>();
+        String book1 = "Harry Potter and the Sorcerer's Stone";
+        books.add(book1);
+        catalog = new Catalog(books, printStream);
+        catalog.listBooks();
+        verify(printStream).println("Harry Potter and the Sorcerer's Stone");
     }
 }
