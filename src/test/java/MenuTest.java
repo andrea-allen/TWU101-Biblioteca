@@ -13,7 +13,13 @@ public class MenuTest {
     @Test
     public void menuIncludesListBooksOption(){
         Menu menu = new Menu();
-        assertEquals("1: List books", menu.options().get(1));
+        assertEquals("1: List books", menu.options().get(2));
+    }
+
+    @Test
+    public void menuIncludesQuitOption(){
+        Menu menu = new Menu();
+        assertEquals("0: Quit", menu.options().get(1));
     }
 
 

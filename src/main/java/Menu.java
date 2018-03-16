@@ -4,12 +4,14 @@ public class Menu {
 
     private ArrayList<String> menu;
     private static final String MENU_TITLE = "Select a menu option:";
-    private static final String OPTION1 = "1: List books";
+    private static final String QUIT = "0: Quit";
+    private static final String LIST_BOOKS = "1: List books";
 
     public Menu() {
         menu = new ArrayList<>();
         menu.add(MENU_TITLE);
-        menu.add(OPTION1);
+        menu.add(QUIT);
+        menu.add(LIST_BOOKS);
     }
 
     public ArrayList<String> options() {
