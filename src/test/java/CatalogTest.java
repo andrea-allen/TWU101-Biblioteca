@@ -11,7 +11,7 @@ public class CatalogTest {
 
     private Catalog catalog;
     private PrintStream printStream;
-    private ArrayList<String> books;
+    private ArrayList<Book> books;
 
     @Before
     public void SetUp() {
@@ -30,19 +30,19 @@ public class CatalogTest {
 
     @Test
     public void shouldPrintBookWhenCatalogHasOneBook() {
-        String book1 = "Harry Potter and the Sorcerer's Stone";
+        Book book1 = new Book("Harry Potter and the Sorcerer's Stone", "JK Rowling", "1990");
         books.add(book1);
         catalog.listBooks();
-        verify(printStream).println("Harry Potter and the Sorcerer's Stone\n");
+        verify(printStream).println("Harry Potter and the Sorcerer's Stone : JK Rowling : 1990\n");
     }
 
     @Test
     public void shouldPrintBothBooksWhenCatalogHasTwoBooks() {
-        String book1 = "Life of Pi";
-        String book2 = "The Goose Girl";
+        Book book1 = new Book("Life of Pi", "Yan Martel", "2005");
+        Book book2 = new Book("The Goose Girl", "Fancy Author", "3050");
         books.add(book1);
         books.add(book2);
         catalog.listBooks();
-        verify(printStream).println("Life of Pi\nThe Goose Girl\n");
+        verify(printStream).println("Life of Pi : Yan Martel : 2005\nThe Goose Girl : Fancy Author : 3050\n");
     }
 }

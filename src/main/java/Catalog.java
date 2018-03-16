@@ -3,18 +3,18 @@ import java.util.ArrayList;
 
 public class Catalog {
 
-    private ArrayList<String> books;
+    private ArrayList<Book> books;
     private PrintStream printStream;
 
-    public Catalog(ArrayList<String> books, PrintStream printStream) {
+    public Catalog(ArrayList<Book> books, PrintStream printStream) {
         this.books = books;
         this.printStream = printStream;
     }
 
     public void listBooks() {
         String bookList = "";
-        for (String book : books) {
-            bookList += book + "\n";
+        for (Book book : books) {
+            bookList += book.info() + "\n";
         }
         printStream.println(bookList);
     }
