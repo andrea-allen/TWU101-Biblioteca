@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -8,17 +9,30 @@ import static org.mockito.Mockito.verify;
 
 public class BibliotecaTest {
 
+    private PrintStream printStream;
+    private Catalog catalog;
+    private Menu menu;
+    private Biblioteca biblioteca;
+    private Printer printer;
+
+    @Before
+    public void setUp() {
+        printStream = mock(PrintStream.class);
+        catalog = new Catalog(new ArrayList<>(), printStream);
+        menu = new Menu();
+        printer = mock(Printer.class);
+        biblioteca = new Biblioteca(catalog, menu, printStream, printer);
+    }
+
     @Test
     public void testDisplayMenu() {
-        PrintStream printStream = mock(PrintStream.class);
-        WelcomeGreeter welcomeGreeter = new WelcomeGreeter(printStream);
-        Catalog catalog = new Catalog(new ArrayList<>(), printStream);
-        Menu menu = new Menu();
-
-        Biblioteca biblioteca = new Biblioteca(welcomeGreeter, catalog, menu, printStream);
         biblioteca.showMenu();
         verify(printStream).println("Menu Options\n1: List Books");
     }
 
-
+    @Test
+    public void startShouldDisplayWelcomeMessage() {
+        biblioteca.start();
+        verify(printer).print("Welcome to Biblioteca!");
+    }
 }

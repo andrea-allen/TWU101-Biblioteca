@@ -6,7 +6,6 @@ public class BibliotecaStarter {
     public static void main(String[] args) {
 
         PrintStream printStream = new PrintStream(System.out);
-        WelcomeGreeter welcomeGreeter = new WelcomeGreeter(printStream);
         ArrayList<Book> books = new ArrayList<>();
         Book book1 = new Book("Life of Pi", "Yan Martel", "2005");
         Book book2 = new Book("The Goose Girl", "Fancy Author", "3050");
@@ -14,7 +13,8 @@ public class BibliotecaStarter {
         books.add(book2);
         Catalog catalog = new Catalog(books, printStream);
         Menu menu = new Menu();
-        Biblioteca biblioteca = new Biblioteca(welcomeGreeter, catalog, menu, printStream);
+        Printer printer = new Printer(printStream);
+        Biblioteca biblioteca = new Biblioteca(catalog, menu, printStream, printer);
         biblioteca.start();
 
     }

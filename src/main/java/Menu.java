@@ -1,7 +1,7 @@
 public class Menu {
 
-    private String MENU_TITLE = "Menu Options";
-    private String OPTION1 = "1: List Books";
+    private static final String MENU_TITLE = "Menu Options";
+    private static final String OPTION1 = "1: List Books";
 
 
     public String options() {

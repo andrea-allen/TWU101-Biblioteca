@@ -7,8 +7,7 @@ public class Printer {
         this.printStream = printStream;
     }
 
-    public void printString(String string) {
+    public void print(String string) {
         printStream.println(string);
-
     }
 }

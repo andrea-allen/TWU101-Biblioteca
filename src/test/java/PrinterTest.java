@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -13,7 +12,7 @@ public class PrinterTest {
         String string = "myString";
         PrintStream printStream = mock(PrintStream.class);
         Printer printer = new Printer(printStream);
-        printer.printString(string);
+        printer.print(string);
         verify(printStream).println(string);
         }
 

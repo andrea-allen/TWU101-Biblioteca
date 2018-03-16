@@ -2,23 +2,24 @@ import java.io.PrintStream;
 
 public class Biblioteca {
 
-    private WelcomeGreeter welcomeGreeter;
     private Catalog catalog;
     private PrintStream printStream;
     private Menu menu;
+    private Printer printer;
 
-    public Biblioteca(WelcomeGreeter welcomeGreeter, Catalog catalog, Menu menu, PrintStream printStream){
+    private static final String WELCOME_MESSAGE = "Welcome to Biblioteca!";
+
+    public Biblioteca(Catalog catalog, Menu menu, PrintStream printStream, Printer printer){
         this.catalog = catalog;
-        this.welcomeGreeter = welcomeGreeter;
         this.printStream = printStream;
         this.menu = menu;
+        this.printer = printer;
     }
 
     public void start() {
-        welcomeGreeter.printGreeting();
+        printer.print(WELCOME_MESSAGE);
         showMenu();
         catalog.listBooks();
-
     }
 
     public void showMenu() {
