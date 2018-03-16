@@ -26,13 +26,25 @@ public class PrinterTest {
     }
 
     @Test
-    public void printShouldPrintAnArrayOfStringsWithLineBreaks() {
+    public void printShouldPrintAnArrayOfStrings() {
         ArrayList<String> stringArray = new ArrayList<>();
         stringArray.add("Red");
         stringArray.add("Green");
         printer.print(stringArray);
         verify(printStream).println("Red");
         verify(printStream).println("Green");
+    }
+
+    @Test
+    public void printShouldPrintAnArrayOfBooks() {
+        ArrayList<Book> bookArray = new ArrayList<>();
+        Book book1 = new Book("Deltora Quest", "Emily Rodda", "2000");
+        Book book2 = new Book("Angela's Ashes", "Frank McCourt", "1998");
+        bookArray.add(book1);
+        bookArray.add(book2);
+        printer.printBooks(bookArray);
+        verify(printStream).println("Deltora Quest : Emily Rodda : 2000");
+        verify(printStream).println("Angela's Ashes : Frank McCourt : 1998");
     }
 
 }

@@ -21,13 +21,13 @@ public class BibliotecaTest {
         catalog = new Catalog(new ArrayList<>(), printStream);
         menu = new Menu();
         printer = mock(Printer.class);
-        biblioteca = new Biblioteca(catalog, menu, printStream, printer);
+        biblioteca = new Biblioteca(catalog, menu, printer);
     }
 
     @Test
     public void testDisplayMenu() {
         biblioteca.showMenu();
-        verify(printStream).println("Menu Options\n1: List Books");
+        verify(printer).print(new Menu().options());
     }
 
     @Test

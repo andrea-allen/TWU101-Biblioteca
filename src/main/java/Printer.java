@@ -17,4 +17,10 @@ public class Printer {
             printStream.println(word);
         }
     }
+
+    public void printBooks(ArrayList<Book> books) {
+        for (Book book : books) {
+            printStream.println(book.info());
+        }
+    }
 }

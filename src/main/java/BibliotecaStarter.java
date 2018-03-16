@@ -14,7 +14,7 @@ public class BibliotecaStarter {
         Catalog catalog = new Catalog(books, printStream);
         Menu menu = new Menu();
         Printer printer = new Printer(printStream);
-        Biblioteca biblioteca = new Biblioteca(catalog, menu, printStream, printer);
+        Biblioteca biblioteca = new Biblioteca(catalog, menu, printer);
         biblioteca.start();
 
     }
