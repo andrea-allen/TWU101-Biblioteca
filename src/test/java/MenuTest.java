@@ -7,13 +7,13 @@ public class MenuTest {
     @Test
     public void menuIncludesTitle(){
         Menu menu = new Menu();
-        assertEquals("Menu Options", menu.options().get(0));
+        assertEquals("Select a menu option:", menu.options().get(0));
     }
 
     @Test
     public void menuIncludesListBooksOption(){
         Menu menu = new Menu();
-        assertEquals("1: List Books", menu.options().get(1));
+        assertEquals("1: List books", menu.options().get(1));
     }
 
 

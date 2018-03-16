@@ -1,11 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BibliotecaTest {
 
@@ -15,6 +18,7 @@ public class BibliotecaTest {
     private Biblioteca biblioteca;
     private Printer printer;
     private ArrayList<Book> books;
+    private BufferedReader reader;
 
     @Before
     public void setUp() {
@@ -23,7 +27,8 @@ public class BibliotecaTest {
         catalog = new Catalog(books);
         menu = new Menu();
         printer = mock(Printer.class);
-        biblioteca = new Biblioteca(catalog, menu, printer);
+        reader  = mock(BufferedReader.class);
+        biblioteca = new Biblioteca(catalog, menu, printer, reader);
     }
 
     @Test
@@ -33,7 +38,8 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void startShouldDisplayWelcomeMessage() {
+    public void startShouldDisplayWelcomeMessage() throws IOException {
+        when(reader.readLine()).thenReturn("1");
         biblioteca.start();
         verify(printer).print("Welcome to Biblioteca!");
     }
@@ -41,6 +47,14 @@ public class BibliotecaTest {
     @Test
     public void listBooksShouldPrintBooks() {
         biblioteca.listBooks();
+        verify(printer).printBooks(books);
+    }
+
+
+    @Test
+    public void handleMenuShouldPrintBooksWhenUserSelectsOption1() throws IOException {
+        when(reader.readLine()).thenReturn("1");
+        biblioteca.handleMenu();
         verify(printer).printBooks(books);
     }
 }
