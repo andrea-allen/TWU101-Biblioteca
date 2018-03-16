@@ -15,7 +15,11 @@ public class Biblioteca {
     public void start() {
         printer.print(WELCOME_MESSAGE);
         showMenu();
-        catalog.listBooks();
+        listBooks();
+    }
+
+    protected void listBooks() {
+        printer.printBooks(catalog.getBooks());
     }
 
     public void showMenu() {

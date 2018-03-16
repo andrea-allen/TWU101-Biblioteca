@@ -11,7 +11,7 @@ public class BibliotecaStarter {
         Book book2 = new Book("The Goose Girl", "Fancy Author", "3050");
         books.add(book1);
         books.add(book2);
-        Catalog catalog = new Catalog(books, printStream);
+        Catalog catalog = new Catalog(books);
         Menu menu = new Menu();
         Printer printer = new Printer(printStream);
         Biblioteca biblioteca = new Biblioteca(catalog, menu, printer);

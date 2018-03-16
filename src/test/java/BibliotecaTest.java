@@ -14,11 +14,13 @@ public class BibliotecaTest {
     private Menu menu;
     private Biblioteca biblioteca;
     private Printer printer;
+    private ArrayList<Book> books;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        catalog = new Catalog(new ArrayList<>(), printStream);
+        books = new ArrayList<>();
+        catalog = new Catalog(books);
         menu = new Menu();
         printer = mock(Printer.class);
         biblioteca = new Biblioteca(catalog, menu, printer);
@@ -34,5 +36,11 @@ public class BibliotecaTest {
     public void startShouldDisplayWelcomeMessage() {
         biblioteca.start();
         verify(printer).print("Welcome to Biblioteca!");
+    }
+
+    @Test
+    public void listBooksShouldPrintBooks() {
+        biblioteca.listBooks();
+        verify(printer).printBooks(books);
     }
 }
