@@ -13,7 +13,8 @@ public class BibliotecaStarter {
         books.add(book1);
         books.add(book2);
         Catalog catalog = new Catalog(books, printStream);
-        Biblioteca biblioteca = new Biblioteca(welcomeGreeter, catalog);
+        Menu menu = new Menu();
+        Biblioteca biblioteca = new Biblioteca(welcomeGreeter, catalog, menu, printStream);
         biblioteca.start();
 
     }
