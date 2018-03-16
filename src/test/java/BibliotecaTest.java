@@ -45,16 +45,23 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void listBooksShouldPrintBooks() {
-        biblioteca.listBooks();
-        verify(printer).printBooks(books);
-    }
-
-
-    @Test
     public void handleMenuShouldPrintBooksWhenUserSelectsOption1() throws IOException {
         when(reader.readLine()).thenReturn("1");
         biblioteca.handleMenu();
         verify(printer).printBooks(books);
+    }
+
+    @Test
+    public void handleMenuNotifiesUserOnInvalidStringOption() throws IOException {
+        when(reader.readLine()).thenReturn("2");
+        biblioteca.handleMenu();
+        verify(printer).print("You selected an invalid option.");
+    }
+
+    @Test
+    public void handleMenuNotifiesUserOnUnsupportedOptionType() throws IOException {
+        when(reader.readLine()).thenThrow(new IOException());
+        biblioteca.handleMenu();
+        verify(printer).print("You selected an invalid option.");
     }
 }
