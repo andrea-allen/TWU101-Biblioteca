@@ -1,20 +1,12 @@
-public class Book {
+public class Book extends LibraryItem {
 
-    private String title;
-    private String author;
-    private String yearPublished;
 
-    public Book(String title, String author, String yearPublished) {
-        this.title = title;
-        this.author = author;
-        this.yearPublished = yearPublished;
+    public Book(String title, String creator, String year) {
+        super(title, creator, year);
     }
 
+    @Override
     public String info() {
-        return title + " : " + author + " : " + yearPublished;
-    }
-
-    public String getTitle() {
-        return title;
+        return title + " : " + creator + " : " + year;
     }
 }

@@ -1,18 +1,14 @@
-public class Movie {
+public class Movie extends LibraryItem {
 
-    private String title;
-    private String director;
-    private String year;
     private String rating;
 
     public Movie(String title, String director, String year, String rating) {
-        this.title = title;
-        this.director = director;
-        this.year = year;
+        super(title, director, year);
         this.rating = rating;
     }
 
+    @Override
     public String info() {
-        return title + " : " + director + " : " + year + " : " + rating;
+        return title + " : " + creator + " : " + year + " : " + rating;
     }
 }
