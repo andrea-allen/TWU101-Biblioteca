@@ -19,6 +19,7 @@ public class BibliotecaTest {
     private ArrayList<Movie> movies;
     private BufferedReader reader;
     private Book java_book;
+    private Movie jungle_book_movie;
 
 
     @Before
@@ -26,7 +27,11 @@ public class BibliotecaTest {
         books = new ArrayList<>();
         java_book = new Book("Java For Dummies", "Bob", "2018");
         books.add(java_book);
+
         movies = new ArrayList<>();
+        jungle_book_movie = new Movie("The Jungle Book", "Jon Favreau", "2016", "7.5");
+        movies.add(jungle_book_movie);
+
         catalog = new Catalog(books, movies);
         menu = new Menu();
         printer = mock(Printer.class);
@@ -82,6 +87,15 @@ public class BibliotecaTest {
         verify(printer).print("Which book would you like to check out?");
         assertFalse(catalog.getAvailableBooks().contains(java_book));
         assertTrue(catalog.getCheckedOutBooks().contains(java_book));
+    }
+
+    @Test
+    public void shouldRespondAndCheckoutMovieWhenUserSelectsCheckout() throws IOException {
+        when(reader.readLine()).thenReturn("5").thenReturn(jungle_book_movie.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which movie would you like to check out?");
+        assertFalse(catalog.getAvailableMovies().contains(jungle_book_movie));
+        assertTrue(catalog.getCheckedOutMovies().contains(jungle_book_movie));
     }
 
     @Test

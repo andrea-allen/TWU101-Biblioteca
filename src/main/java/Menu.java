@@ -9,6 +9,7 @@ public class Menu {
     private static final String LIST_MOVIES = "2: List movies";
     private static final String CHECKOUT_BOOK = "3: Checkout book";
     private static final String RETURN_BOOK = "4: Return book";
+    private static final String CHECKOUT_MOVIE = "5: Checkout movie";
 
     public Menu() {
         menu = new ArrayList<>();
@@ -18,6 +19,7 @@ public class Menu {
         menu.add(LIST_MOVIES);
         menu.add(CHECKOUT_BOOK);
         menu.add(RETURN_BOOK);
+        menu.add(CHECKOUT_MOVIE);
     }
 
     public ArrayList<String> options() {

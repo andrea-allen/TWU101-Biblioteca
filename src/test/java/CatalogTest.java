@@ -28,9 +28,15 @@ public class CatalogTest {
     }
 
     @Test
-    public void checkoutBookShouldPutBookInCheckedOutBooksList() throws Exception {
+    public void checkoutBookShouldPutBookInCheckedOutBooksList() {
         catalog.checkoutBook(catcher_in_the_rye.getTitle());
         assertTrue(catalog.getCheckedOutBooks().contains(catcher_in_the_rye));
+    }
+
+    @Test
+    public void checkoutMovieShouldPutMovieInCheckedOutMoviesList() {
+        catalog.checkoutMovie(call_me_by_your_name.getTitle());
+        assertTrue(catalog.getCheckedOutMovies().contains(call_me_by_your_name));
     }
 
     @Test
@@ -40,15 +46,32 @@ public class CatalogTest {
     }
 
     @Test
+    public void checkedOutMovieShouldNotBeInAvailableMovies() {
+        catalog.checkoutMovie(call_me_by_your_name.getTitle());
+        assertTrue(!catalog.getAvailableMovies().contains(call_me_by_your_name));
+    }
+
+    @Test
     public void checkoutBookShouldReturnFalseIfBookIsNotAvailable() {
         boolean result = catalog.checkoutBook("Some Other Book");
         assertFalse(result);
+    }
 
+    @Test
+    public void checkoutMovieShouldReturnFalseIfMovieIsNotAvailable() {
+        boolean result = catalog.checkoutMovie("Some Other Movie");
+        assertFalse(result);
     }
 
     @Test
     public void checkoutBookShouldReturnTrueIfBookIsAvailable() {
         boolean result = catalog.checkoutBook(catcher_in_the_rye.getTitle());
+        assertTrue(result);
+    }
+
+    @Test
+    public void checkoutMovieShouldReturnTrueIfMovieIsAvailable() {
+        boolean result = catalog.checkoutMovie(call_me_by_your_name.getTitle());
         assertTrue(result);
     }
 
