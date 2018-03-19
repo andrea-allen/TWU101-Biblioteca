@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
@@ -15,11 +17,14 @@ public class BibliotecaTest {
     private Printer printer;
     private ArrayList<Book> books;
     private BufferedReader reader;
+    private Book java_book;
 
 
     @Before
     public void setUp() {
         books = new ArrayList<>();
+        java_book = new Book("Java For Dummies", "Bob", "2018");
+        books.add(java_book);
         catalog = new Catalog(books);
         menu = new Menu();
         printer = mock(Printer.class);
@@ -41,23 +46,8 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void startShouldHandleRepeatingMenuWhenUserSelectsOption1Then0() throws IOException {
-        Menu menu = new Menu();
-
-        when(reader.readLine()).thenReturn("1").thenReturn("0");
-
-        biblioteca.start();
-        verify(printer).print("Welcome to Biblioteca!");
-
-        verify(printer, times(2)).print(menu.options());
-        verify(printer).printBooks(books);
-        verify(printer).print("Thank you for using Biblioteca. Goodbye!");
-
-    }
-
-    @Test
     public void handleMenuNotifiesUserOnInvalidStringOption() throws IOException {
-        when(reader.readLine()).thenReturn("2");
+        when(reader.readLine()).thenReturn("50");
         biblioteca.handleUserInput();
         verify(printer).print("You selected an invalid option.");
     }
@@ -74,5 +64,29 @@ public class BibliotecaTest {
         when(reader.readLine()).thenReturn("0");
         biblioteca.handleUserInput();
         verify(printer).print("Thank you for using Biblioteca. Goodbye!");
+    }
+
+    @Test
+    public void shouldRespondWhenUserSelectsCheckout() throws IOException {
+        when(reader.readLine()).thenReturn("2").thenReturn(java_book.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to check out?");
+        assertFalse(catalog.getAvailableBooks().contains(java_book));
+        assertTrue(catalog.getCheckedOutBooks().contains(java_book));
+    }
+
+    @Test
+    public void startShouldHandleRepeatingMenuWhenUserSelectsOption1Then0() throws IOException {
+        Menu menu = new Menu();
+
+        when(reader.readLine()).thenReturn("1").thenReturn("0");
+
+        biblioteca.start();
+        verify(printer).print("Welcome to Biblioteca!");
+
+        verify(printer, times(2)).print(menu.options());
+        verify(printer).printBooks(books);
+        verify(printer).print("Thank you for using Biblioteca. Goodbye!");
+
     }
 }

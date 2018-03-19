@@ -11,6 +11,7 @@ public class Biblioteca {
     private static final String WELCOME_MESSAGE = "Welcome to Biblioteca!";
     private static final String INVALID_OPTION_MESSAGE = "You selected an invalid option.";
     private static final String GOODBYE_MESSAGE = "Thank you for using Biblioteca. Goodbye!";
+    private static final String CHECKOUT_BOOK_PROMPT = "Which book would you like to check out?";
 
     public Biblioteca(Catalog catalog, Menu menu, Printer printer, BufferedReader reader){
         this.catalog = catalog;
@@ -44,6 +45,8 @@ public class Biblioteca {
         String menuOption = getMenuOptionFromUser();
         if (menuOption.equals("1")) {
             listBooks();
+        } else if (menuOption.equals("2")) {
+            checkOutBook();
         } else if (menuOption.equals("0")) {
             displayGoodbyeMessage();
             return true;
@@ -51,6 +54,16 @@ public class Biblioteca {
             displayInvalidOptionMessage();
         }
         return false;
+    }
+
+    private void checkOutBook() {
+        printer.print(CHECKOUT_BOOK_PROMPT);
+        try {
+            String bookTitle = reader.readLine();
+            catalog.checkoutBook(bookTitle);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getMenuOptionFromUser() {
@@ -70,6 +83,8 @@ public class Biblioteca {
     }
 
     private void listBooks() {
-        printer.printBooks(catalog.getBooks());
+        printer.printBooks(catalog.getAvailableBooks());
     }
+
+
 }

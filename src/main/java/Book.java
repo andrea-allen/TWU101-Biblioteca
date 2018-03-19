@@ -13,4 +13,8 @@ public class Book {
     public String info() {
         return title + " : " + author + " : " + yearPublished;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
