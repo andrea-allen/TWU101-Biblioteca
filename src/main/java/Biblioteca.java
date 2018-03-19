@@ -20,8 +20,12 @@ public class Biblioteca {
     }
 
     public void start() {
-        printer.print(WELCOME_MESSAGE);
+        showWelcomeMessage();
         runMenuLoop();
+    }
+
+    private void showWelcomeMessage() {
+        printer.print(WELCOME_MESSAGE);
     }
 
     private void runMenuLoop() {
@@ -37,14 +41,7 @@ public class Biblioteca {
     }
 
     protected boolean handleUserInput() {
-        String menuOption = null;
-        try {
-            menuOption = reader.readLine();
-        } catch (IOException e) {
-            displayInvalidOptionMessage();
-            return false;
-        }
-
+        String menuOption = getMenuOptionFromUser();
         if (menuOption.equals("1")) {
             listBooks();
         } else if (menuOption.equals("0")) {
@@ -54,6 +51,14 @@ public class Biblioteca {
             displayInvalidOptionMessage();
         }
         return false;
+    }
+
+    private String getMenuOptionFromUser() {
+        try {
+            return reader.readLine();
+        } catch (IOException e) {
+            return "";
+        }
     }
 
     private void displayGoodbyeMessage() {
