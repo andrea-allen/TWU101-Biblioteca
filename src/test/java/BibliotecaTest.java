@@ -133,6 +133,16 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void shouldRespondAndReturnMovieWhenUserSelectsReturn() throws IOException {
+        catalog.checkoutMovie(jungle_book_movie.getTitle());
+        when(reader.readLine()).thenReturn("6").thenReturn(jungle_book_movie.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which movie would you like to return?");
+        assertTrue(catalog.getAvailableMovies().contains(jungle_book_movie));
+        assertFalse(catalog.getCheckedOutMovies().contains(jungle_book_movie));
+    }
+
+    @Test
     public void successfulReturnShouldShowSuccessMessage() throws IOException {
         catalog.checkoutBook(java_book.getTitle());
         when(reader.readLine()).thenReturn("4").thenReturn(java_book.getTitle());

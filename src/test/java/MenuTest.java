@@ -41,6 +41,12 @@ public class MenuTest {
     }
 
     @Test
+    public void menuIncludesReturnMovieOption(){
+        Menu menu = new Menu();
+        assertEquals("6: Return movie", menu.options().get(7));
+    }
+
+    @Test
     public void menuIncludesQuitOption(){
         Menu menu = new Menu();
         assertEquals("0: Quit", menu.options().get(1));

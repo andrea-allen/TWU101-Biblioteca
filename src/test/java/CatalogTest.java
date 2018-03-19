@@ -83,12 +83,25 @@ public class CatalogTest {
     }
 
     @Test
+    public void returnMovieShouldPutMovieInAvailableMovieList() {
+        catalog.checkoutMovie(call_me_by_your_name.getTitle());
+        catalog.returnMovie(call_me_by_your_name.getTitle());
+        assertTrue(catalog.getAvailableMovies().contains(call_me_by_your_name));
+    }
+
+    @Test
     public void returnedBookShouldNotBeInCheckedOutBooks() {
         catalog.checkoutBook(catcher_in_the_rye.getTitle());
         catalog.returnBook(catcher_in_the_rye.getTitle());
         assertTrue(!catalog.getCheckedOutBooks().contains(catcher_in_the_rye));
     }
 
+    @Test
+    public void returnedMovieShouldNotBeInCheckedOutMovies() {
+        catalog.checkoutMovie(call_me_by_your_name.getTitle());
+        catalog.returnMovie(call_me_by_your_name.getTitle());
+        assertTrue(!catalog.getCheckedOutMovies().contains(call_me_by_your_name));
+    }
 
     @Test
     public void returnBookShouldReturnFalseIfBookIsNotCheckedOut() {
@@ -97,9 +110,22 @@ public class CatalogTest {
     }
 
     @Test
+    public void returnMovieShouldReturnFalseIfMovieIsNotCheckedOut() {
+        boolean result = catalog.returnMovie(call_me_by_your_name.getTitle());
+        assertFalse(result);
+    }
+
+    @Test
     public void returnBookShouldReturnTrueIfBookIsCheckedOut() {
         catalog.checkoutBook(catcher_in_the_rye.getTitle());
         boolean result = catalog.returnBook(catcher_in_the_rye.getTitle());
+        assertTrue(result);
+    }
+
+    @Test
+    public void returnMovieShouldReturnTrueIfMovieIsCheckedOut() {
+        catalog.checkoutMovie(call_me_by_your_name.getTitle());
+        boolean result = catalog.returnMovie(call_me_by_your_name.getTitle());
         assertTrue(result);
     }
 

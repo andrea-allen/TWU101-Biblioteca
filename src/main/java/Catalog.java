@@ -48,12 +48,21 @@ public class Catalog {
         return false;
     }
 
-
     public boolean returnBook(String bookTitle) {
         Book bookToReturn = findBookByTitle(bookTitle, checkedOutBooks);
         if (bookToReturn != null) {
             availableBooks.add(bookToReturn);
             checkedOutBooks.remove(bookToReturn);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean returnMovie(String movieTitle) {
+        Movie movieToReturn = findMovieByTitle(movieTitle, checkedOutMovies);
+        if (movieToReturn != null) {
+            availableMovies.add(movieToReturn);
+            checkedOutMovies.remove(movieToReturn);
             return true;
         }
         return false;
