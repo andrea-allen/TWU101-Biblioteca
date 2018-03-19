@@ -51,8 +51,10 @@ public class Biblioteca {
         if (menuOption.equals("1")) {
             listBooks();
         } else if (menuOption.equals("2")) {
-            checkOutBook();
+            listMovies();
         } else if (menuOption.equals("3")) {
+            checkOutBook();
+        } else if (menuOption.equals("4")) {
             returnBook();
         } else if (menuOption.equals("0")) {
             displayGoodbyeMessage();
@@ -103,6 +105,8 @@ public class Biblioteca {
     private void listBooks() {
         printer.printBooks(catalog.getAvailableBooks());
     }
+
+    private void listMovies() {  printer.printMovies(catalog.getAvailableMovies()); }
 
 
 }

@@ -47,12 +47,12 @@ public class BibliotecaTest {
         verify(printer).printBooks(books);
     }
 
-//    @Test
-//    public void handleMenuShouldPrintMoviesWhenUserSelectsOption4() throws IOException {
-//        when(reader.readLine()).thenReturn("4");
-//        biblioteca.handleUserInput();
-//        verify(printer).printMovies(movies);
-//    }
+    @Test
+    public void handleMenuShouldPrintMoviesWhenUserSelectsOption2() throws IOException {
+        when(reader.readLine()).thenReturn("2");
+        biblioteca.handleUserInput();
+        verify(printer).printMovies(movies);
+    }
 
     @Test
     public void handleMenuNotifiesUserOnInvalidStringOption() throws IOException {
@@ -77,7 +77,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldRespondAndCheckoutBookWhenUserSelectsCheckout() throws IOException {
-        when(reader.readLine()).thenReturn("2").thenReturn(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to check out?");
         assertFalse(catalog.getAvailableBooks().contains(java_book));
@@ -86,7 +86,7 @@ public class BibliotecaTest {
 
     @Test
     public void successfulCheckoutShouldShowSuccessMessage() throws IOException {
-        when(reader.readLine()).thenReturn("2").thenReturn(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to check out?");
         verify(printer).print("Thank you! Enjoy your book.");
@@ -94,7 +94,7 @@ public class BibliotecaTest {
 
     @Test
     public void unsuccessfulCheckoutShouldShowUnavailable() throws IOException {
-        when(reader.readLine()).thenReturn("2").thenReturn("Book");
+        when(reader.readLine()).thenReturn("3").thenReturn("Book");
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to check out?");
         verify(printer).print("This book is not available.");
@@ -102,7 +102,7 @@ public class BibliotecaTest {
 
     @Test
     public void nonBookCheckoutShouldShowUnavailable() throws IOException {
-        when(reader.readLine()).thenReturn("2").thenThrow(new IOException());
+        when(reader.readLine()).thenReturn("3").thenThrow(new IOException());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to check out?");
         verify(printer).print("This book is not available.");
@@ -111,7 +111,7 @@ public class BibliotecaTest {
     @Test
     public void shouldRespondAndReturnBookWhenUserSelectsReturn() throws IOException {
         catalog.checkoutBook(java_book.getTitle());
-        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
+        when(reader.readLine()).thenReturn("4").thenReturn(java_book.getTitle());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to return?");
         assertTrue(catalog.getAvailableBooks().contains(java_book));
@@ -121,7 +121,7 @@ public class BibliotecaTest {
     @Test
     public void successfulReturnShouldShowSuccessMessage() throws IOException {
         catalog.checkoutBook(java_book.getTitle());
-        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
+        when(reader.readLine()).thenReturn("4").thenReturn(java_book.getTitle());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to return?");
         verify(printer).print("Thank you for returning the book.");
@@ -130,7 +130,7 @@ public class BibliotecaTest {
     @Test
     public void unsuccessfulReturnShouldShowUnavailable() throws IOException {
         catalog.checkoutBook(java_book.getTitle());
-        when(reader.readLine()).thenReturn("3").thenReturn("Book");
+        when(reader.readLine()).thenReturn("4").thenReturn("Book");
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to return?");
         verify(printer).print("That is not a valid book to return.");
@@ -139,7 +139,7 @@ public class BibliotecaTest {
     @Test
     public void nonBookReturnShouldShowUnavailable() throws IOException {
         catalog.checkoutBook(java_book.getTitle());
-        when(reader.readLine()).thenReturn("3").thenThrow(new IOException());
+        when(reader.readLine()).thenReturn("4").thenThrow(new IOException());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to return?");
         verify(printer).print("That is not a valid book to return.");

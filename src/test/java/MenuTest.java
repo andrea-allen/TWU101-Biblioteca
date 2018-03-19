@@ -17,15 +17,21 @@ public class MenuTest {
     }
 
     @Test
+    public void menuIncludesListMoviesOption(){
+        Menu menu = new Menu();
+        assertEquals("2: List movies", menu.options().get(3));
+    }
+
+    @Test
     public void menuIncludesCheckoutBookOption(){
         Menu menu = new Menu();
-        assertEquals("2: Checkout book", menu.options().get(3));
+        assertEquals("3: Checkout book", menu.options().get(4));
     }
 
     @Test
     public void menuIncludesReturnBookOption(){
         Menu menu = new Menu();
-        assertEquals("3: Return book", menu.options().get(4));
+        assertEquals("4: Return book", menu.options().get(5));
     }
 
     @Test

@@ -12,6 +12,11 @@ public class BibliotecaStarter {
         Book book2 = new Book("The Goose Girl", "Fancy Author", "3050");
         books.add(book1);
         books.add(book2);
+
+        Movie movie1 = new Movie("Good Will Hunting", "Gus Van Sant", "1997", "8.3");
+        Movie movie2 = new Movie("Moana", "Ron Clements", "2016", "7.6");
+        movies.add(movie1);
+        movies.add(movie2);
         Catalog catalog = new Catalog(books, movies);
 
         Menu menu = new Menu();
