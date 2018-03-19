@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Menu {
 
     private ArrayList<String> menu;
-    private static final String MENU_TITLE = "Select a menu option:";
+    private static final String MENU_TITLE = "\nSelect a menu option:";
     private static final String QUIT = "0: Quit";
     private static final String LIST_BOOKS = "1: List books";
     private static final String CHECKOUT_BOOK = "2: Checkout book";

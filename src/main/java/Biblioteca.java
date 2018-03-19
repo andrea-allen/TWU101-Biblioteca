@@ -12,6 +12,7 @@ public class Biblioteca {
     private static final String INVALID_OPTION_MESSAGE = "You selected an invalid option.";
     private static final String GOODBYE_MESSAGE = "Thank you for using Biblioteca. Goodbye!";
     private static final String CHECKOUT_BOOK_PROMPT = "Which book would you like to check out?";
+    private static final String CHECKOUT_SUCCESS_MESSAGE = "Thank you! Enjoy your book.";
 
     public Biblioteca(Catalog catalog, Menu menu, Printer printer, BufferedReader reader){
         this.catalog = catalog;
@@ -64,6 +65,7 @@ public class Biblioteca {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        printer.print(CHECKOUT_SUCCESS_MESSAGE);
     }
 
     private String getMenuOptionFromUser() {

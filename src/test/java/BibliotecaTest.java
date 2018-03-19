@@ -67,12 +67,20 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldRespondWhenUserSelectsCheckout() throws IOException {
+    public void shouldRespondAndCheckoutBookWhenUserSelectsCheckout() throws IOException {
         when(reader.readLine()).thenReturn("2").thenReturn(java_book.getTitle());
         biblioteca.handleUserInput();
         verify(printer).print("Which book would you like to check out?");
         assertFalse(catalog.getAvailableBooks().contains(java_book));
         assertTrue(catalog.getCheckedOutBooks().contains(java_book));
+    }
+
+    @Test
+    public void successfulCheckoutShouldShowSuccessMessage() throws IOException {
+        when(reader.readLine()).thenReturn("2").thenReturn(java_book.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to check out?");
+        verify(printer).print("Thank you! Enjoy your book.");
     }
 
     @Test
