@@ -13,6 +13,7 @@ public class Biblioteca {
     private static final String GOODBYE_MESSAGE = "Thank you for using Biblioteca. Goodbye!";
     private static final String CHECKOUT_BOOK_PROMPT = "Which book would you like to check out?";
     private static final String CHECKOUT_SUCCESS_MESSAGE = "Thank you! Enjoy your book.";
+    private static final String CHECKOUT_FAILURE_MESSAGE = "This book is not available.";
 
     public Biblioteca(Catalog catalog, Menu menu, Printer printer, BufferedReader reader){
         this.catalog = catalog;
@@ -43,7 +44,7 @@ public class Biblioteca {
     }
 
     protected boolean handleUserInput() {
-        String menuOption = getMenuOptionFromUser();
+        String menuOption = getUserInput();
         if (menuOption.equals("1")) {
             listBooks();
         } else if (menuOption.equals("2")) {
@@ -59,16 +60,16 @@ public class Biblioteca {
 
     private void checkOutBook() {
         printer.print(CHECKOUT_BOOK_PROMPT);
-        try {
-            String bookTitle = reader.readLine();
-            catalog.checkoutBook(bookTitle);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        printer.print(CHECKOUT_SUCCESS_MESSAGE);
+        String bookTitle = getUserInput();
+        if (catalog.checkoutBook(bookTitle)) {
+            printer.print(CHECKOUT_SUCCESS_MESSAGE);
+        } else {
+            printer.print(CHECKOUT_FAILURE_MESSAGE);
+        };
+
     }
 
-    private String getMenuOptionFromUser() {
+    private String getUserInput() {
         try {
             return reader.readLine();
         } catch (IOException e) {

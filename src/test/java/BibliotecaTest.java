@@ -84,6 +84,22 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void unsuccessfulCheckoutShouldShowUnavailable() throws IOException {
+        when(reader.readLine()).thenReturn("2").thenReturn("Book");
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to check out?");
+        verify(printer).print("This book is not available.");
+    }
+
+    @Test
+    public void nonBookCheckoutShouldShowUnavailable() throws IOException {
+        when(reader.readLine()).thenReturn("2").thenThrow(new IOException());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to check out?");
+        verify(printer).print("This book is not available.");
+    }
+
+    @Test
     public void startShouldHandleRepeatingMenuWhenUserSelectsOption1Then0() throws IOException {
         Menu menu = new Menu();
 

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CatalogTest {
@@ -31,6 +32,20 @@ public class CatalogTest {
     public void checkedOutBookShouldNotBeInAvailableBooks() {
         catalog.checkoutBook(catcher_in_the_rye.getTitle());
         assertTrue(!catalog.getAvailableBooks().contains(catcher_in_the_rye));
+    }
+
+    @Test
+    public void testCheckoutBookShouldReturnFalseIfBookIsNotAvailable() {
+        boolean result = catalog.checkoutBook("Some Other Book");
+        assertFalse(result);
+
+    }
+
+    @Test
+    public void testCheckoutBookShouldReturnTrueIfBookIsAvailable() {
+        boolean result = catalog.checkoutBook(catcher_in_the_rye.getTitle());
+        assertTrue(result);
+
     }
 
 }

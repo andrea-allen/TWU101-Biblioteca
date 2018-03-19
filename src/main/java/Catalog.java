@@ -13,10 +13,15 @@ public class Catalog {
         return availableBooks;
     }
 
-    public void checkoutBook(String bookTitle) {
+    public boolean checkoutBook(String bookTitle) {
         Book bookToRemove = findBookByTitle(bookTitle);
-        availableBooks.remove(bookToRemove);
-        checkedOutBooks.add(bookToRemove);
+
+        if (bookToRemove != null) {
+            availableBooks.remove(bookToRemove);
+            checkedOutBooks.add(bookToRemove);
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Book> getCheckedOutBooks() {
