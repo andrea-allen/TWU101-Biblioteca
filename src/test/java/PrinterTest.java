@@ -47,4 +47,17 @@ public class PrinterTest {
         verify(printStream).println("Angela's Ashes : Frank McCourt : 1998");
     }
 
+    @Test
+    public void printShouldPrintAnArrayOfMovies() {
+        ArrayList<Movie> movieArray = new ArrayList<>();
+        Movie movie1 = new Movie("Pan's Labyrinth", "Guillermo del Toro", "2006", "8.2");
+        Movie movie2 = new Movie("The Great Gatsby", "Baz Luhrmann", "2013", "7.3");
+
+        movieArray.add(movie1);
+        movieArray.add(movie2);
+        printer.printMovies(movieArray);
+        verify(printStream).println("Pan's Labyrinth : Guillermo del Toro : 2006 : 8.2");
+        verify(printStream).println("The Great Gatsby : Baz Luhrmann : 2013 : 7.3");
+    }
+
 }

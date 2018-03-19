@@ -23,4 +23,10 @@ public class Printer {
             printStream.println(book.info());
         }
     }
+
+    public void printMovies(ArrayList<Movie> movies) {
+        for (Movie movie : movies) {
+            printStream.println(movie.info());
+        }
+    }
 }

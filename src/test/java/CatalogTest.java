@@ -1,10 +1,10 @@
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -12,14 +12,19 @@ public class CatalogTest {
 
     private Catalog catalog;
     private Book catcher_in_the_rye;
+    private Movie call_me_by_your_name;
     private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
 
     @Before
     public void setUp() {
         books = new ArrayList<>();
         catcher_in_the_rye = new Book("Catcher In The Rye", "JD Salinger", "1960");
         books.add(catcher_in_the_rye);
-        catalog = new Catalog(books);
+        movies = new ArrayList<>();
+        call_me_by_your_name = new Movie("Call Me By Your Name", "Luca Guadagnino", "2017", "8.1");
+        movies.add(call_me_by_your_name);
+        catalog = new Catalog(books, movies);
     }
 
     @Test
@@ -45,7 +50,6 @@ public class CatalogTest {
     public void checkoutBookShouldReturnTrueIfBookIsAvailable() {
         boolean result = catalog.checkoutBook(catcher_in_the_rye.getTitle());
         assertTrue(result);
-
     }
 
     @Test
@@ -67,7 +71,6 @@ public class CatalogTest {
     public void returnBookShouldReturnFalseIfBookIsNotCheckedOut() {
         boolean result = catalog.returnBook(catcher_in_the_rye.getTitle());
         assertFalse(result);
-
     }
 
     @Test
@@ -75,6 +78,11 @@ public class CatalogTest {
         catalog.checkoutBook(catcher_in_the_rye.getTitle());
         boolean result = catalog.returnBook(catcher_in_the_rye.getTitle());
         assertTrue(result);
+    }
 
+    @Test
+    public void getAvailableMoviesShouldReturnAvailableMovies() {
+        ArrayList<Movie> availableMovies = catalog.getAvailableMovies();
+        assertEquals(availableMovies, movies);
     }
 }

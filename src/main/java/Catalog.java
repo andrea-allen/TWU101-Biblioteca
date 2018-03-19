@@ -5,8 +5,12 @@ public class Catalog {
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks = new ArrayList<>();
 
-    public Catalog(ArrayList<Book> books) {
+    private ArrayList<Movie> availableMovies;
+
+    public Catalog(ArrayList<Book> books, ArrayList<Movie> movies) {
+
         availableBooks = books;
+        availableMovies = movies;
     }
 
     public ArrayList<Book> getAvailableBooks() {
@@ -16,6 +20,8 @@ public class Catalog {
     public ArrayList<Book> getCheckedOutBooks() {
         return checkedOutBooks;
     }
+
+    public ArrayList<Movie> getAvailableMovies() { return availableMovies; }
 
     public boolean checkoutBook(String bookTitle) {
         Book bookToCheckout = findBookByTitle(bookTitle, availableBooks);

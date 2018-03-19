@@ -16,6 +16,7 @@ public class BibliotecaTest {
     private Biblioteca biblioteca;
     private Printer printer;
     private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
     private BufferedReader reader;
     private Book java_book;
 
@@ -25,7 +26,8 @@ public class BibliotecaTest {
         books = new ArrayList<>();
         java_book = new Book("Java For Dummies", "Bob", "2018");
         books.add(java_book);
-        catalog = new Catalog(books);
+        movies = new ArrayList<>();
+        catalog = new Catalog(books, movies);
         menu = new Menu();
         printer = mock(Printer.class);
         reader  = mock(BufferedReader.class);
@@ -44,6 +46,13 @@ public class BibliotecaTest {
         biblioteca.handleUserInput();
         verify(printer).printBooks(books);
     }
+
+//    @Test
+//    public void handleMenuShouldPrintMoviesWhenUserSelectsOption4() throws IOException {
+//        when(reader.readLine()).thenReturn("4");
+//        biblioteca.handleUserInput();
+//        verify(printer).printMovies(movies);
+//    }
 
     @Test
     public void handleMenuNotifiesUserOnInvalidStringOption() throws IOException {
