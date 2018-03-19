@@ -23,6 +23,12 @@ public class MenuTest {
     }
 
     @Test
+    public void menuIncludesReturnBookOption(){
+        Menu menu = new Menu();
+        assertEquals("3: Return book", menu.options().get(4));
+    }
+
+    @Test
     public void menuIncludesQuitOption(){
         Menu menu = new Menu();
         assertEquals("0: Quit", menu.options().get(1));

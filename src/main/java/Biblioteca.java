@@ -14,6 +14,9 @@ public class Biblioteca {
     private static final String CHECKOUT_BOOK_PROMPT = "Which book would you like to check out?";
     private static final String CHECKOUT_SUCCESS_MESSAGE = "Thank you! Enjoy your book.";
     private static final String CHECKOUT_FAILURE_MESSAGE = "This book is not available.";
+    private static final String RETURN_BOOK_PROMPT = "Which book would you like to return?";
+    private static final String RETURN_SUCCESS_MESSAGE = "Thank you for returning the book.";
+    private static final String RETURN_FAILURE_MESSAGE = "That is not a valid book to return.";
 
     public Biblioteca(Catalog catalog, Menu menu, Printer printer, BufferedReader reader){
         this.catalog = catalog;
@@ -49,6 +52,8 @@ public class Biblioteca {
             listBooks();
         } else if (menuOption.equals("2")) {
             checkOutBook();
+        } else if (menuOption.equals("3")) {
+            returnBook();
         } else if (menuOption.equals("0")) {
             displayGoodbyeMessage();
             return true;
@@ -67,6 +72,16 @@ public class Biblioteca {
             printer.print(CHECKOUT_FAILURE_MESSAGE);
         };
 
+    }
+
+    private void returnBook() {
+        printer.print(RETURN_BOOK_PROMPT);
+        String bookTitle = getUserInput();
+        if (catalog.returnBook(bookTitle)) {
+            printer.print(RETURN_SUCCESS_MESSAGE);
+        } else {
+            printer.print(RETURN_FAILURE_MESSAGE);
+        };
     }
 
     private String getUserInput() {

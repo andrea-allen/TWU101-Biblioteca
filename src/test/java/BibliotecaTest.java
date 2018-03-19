@@ -100,6 +100,43 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void shouldRespondAndReturnBookWhenUserSelectsReturn() throws IOException {
+        catalog.checkoutBook(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to return?");
+        assertTrue(catalog.getAvailableBooks().contains(java_book));
+        assertFalse(catalog.getCheckedOutBooks().contains(java_book));
+    }
+
+    @Test
+    public void successfulReturnShouldShowSuccessMessage() throws IOException {
+        catalog.checkoutBook(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenReturn(java_book.getTitle());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to return?");
+        verify(printer).print("Thank you for returning the book.");
+    }
+
+    @Test
+    public void unsuccessfulReturnShouldShowUnavailable() throws IOException {
+        catalog.checkoutBook(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenReturn("Book");
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to return?");
+        verify(printer).print("That is not a valid book to return.");
+    }
+
+    @Test
+    public void nonBookReturnShouldShowUnavailable() throws IOException {
+        catalog.checkoutBook(java_book.getTitle());
+        when(reader.readLine()).thenReturn("3").thenThrow(new IOException());
+        biblioteca.handleUserInput();
+        verify(printer).print("Which book would you like to return?");
+        verify(printer).print("That is not a valid book to return.");
+    }
+
+    @Test
     public void startShouldHandleRepeatingMenuWhenUserSelectsOption1Then0() throws IOException {
         Menu menu = new Menu();
 

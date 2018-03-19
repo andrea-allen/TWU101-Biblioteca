@@ -13,28 +13,37 @@ public class Catalog {
         return availableBooks;
     }
 
-    public boolean checkoutBook(String bookTitle) {
-        Book bookToRemove = findBookByTitle(bookTitle);
+    public ArrayList<Book> getCheckedOutBooks() {
+        return checkedOutBooks;
+    }
 
-        if (bookToRemove != null) {
-            availableBooks.remove(bookToRemove);
-            checkedOutBooks.add(bookToRemove);
+    public boolean checkoutBook(String bookTitle) {
+        Book bookToCheckout = findBookByTitle(bookTitle, availableBooks);
+
+        if (bookToCheckout != null) {
+            availableBooks.remove(bookToCheckout);
+            checkedOutBooks.add(bookToCheckout);
             return true;
         }
         return false;
     }
 
-    public ArrayList<Book> getCheckedOutBooks() {
-        return checkedOutBooks;
+    public boolean returnBook(String bookTitle) {
+        Book bookToReturn = findBookByTitle(bookTitle, checkedOutBooks);
+        if (bookToReturn != null) {
+            availableBooks.add(bookToReturn);
+            checkedOutBooks.remove(bookToReturn);
+            return true;
+        }
+        return false;
     }
 
-    private Book findBookByTitle(String bookTitle) {
-        for (Book book: availableBooks) {
+    private Book findBookByTitle(String bookTitle, ArrayList<Book> bookList) {
+        for (Book book: bookList) {
             if (book.getTitle().equals(bookTitle)) {
                 return book;
             }
         }
         return null;
     }
-
 }

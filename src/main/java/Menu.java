@@ -7,6 +7,7 @@ public class Menu {
     private static final String QUIT = "0: Quit";
     private static final String LIST_BOOKS = "1: List books";
     private static final String CHECKOUT_BOOK = "2: Checkout book";
+    private static final String RETURN_BOOK = "3: Return book";
 
     public Menu() {
         menu = new ArrayList<>();
@@ -14,6 +15,7 @@ public class Menu {
         menu.add(QUIT);
         menu.add(LIST_BOOKS);
         menu.add(CHECKOUT_BOOK);
+        menu.add(RETURN_BOOK);
     }
 
     public ArrayList<String> options() {
